@@ -87,10 +87,27 @@ builder.Configuration.GetSection("MongoDatabase"));
             };
         });
         builder.Services.AddControllers();
+        builder.Services.AddScoped<JwtSecurityTokenHandler>();
+            var emailConfig = builder.Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            builder.Services.AddSingleton(emailConfig);
+            builder.Services.AddScoped<SignInManager<ApiUser>>();
+            builder.Services.AddScoped<IPdfRepo, PdfService>();
+            builder.Services.AddScoped<IAuthRepo, AuthService>();
+            builder.Services.AddScoped<INewsRepo, NewsService>();
+            builder.Services.AddScoped<INewsRepo, NewsService>();
+            builder.Services.AddScoped<IIndexMarkdownRepo, IndexMarkdownService>();
+            builder.Services.AddScoped<IPostRepo, PostService>();
+            builder.Services.AddScoped<ICommandRepo, CommandService>();
+            builder.Services.AddScoped<ICommentRepo, CommentService>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<ITokenRepo, TokenService>();
+            builder.Services.AddSingleton<IChatRoomService, InMemoryChatRoomService>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
+            
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -100,12 +117,37 @@ builder.Configuration.GetSection("MongoDatabase"));
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-        app.UseAuthorization();
+         
 
+            // app.Use((context, next) =>
+            // {
+            //     // Http Context
+            //     var counter = Metrics.CreateCounter
+            //     ("PathCounter", "Count request",
+            //     new CounterConfiguration
+            //     {
+            //         LabelNames = new[] { "method", "endpoint" }
+            //     });
+            //     // method: GET, POST etc.
+            //     // endpoint: Requested path
+            //     counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+            //     return next();
+            // });
 
-        app.MapControllers();
+            app.UseEndpoints(e =>
+            {
+
+      
+                e.MapHub<ChatHub>("/chathub");
+                e.MapControllers();
+                e.MapHub<NotifHub>("/notifhub");
+         
+            });
 
         app.Run();
     }

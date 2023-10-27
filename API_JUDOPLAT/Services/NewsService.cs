@@ -10,20 +10,20 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
         private readonly IConfiguration configuration;
         private readonly IEmailSender emailSender;
         private readonly ITokenRepo tokenRepo;
-        private readonly IMemoryCache memoryCache;
-        private readonly ILocalStorageService _localStorage;
-        private readonly AuthenticationStateProvider _authenticationStateProvider;
+        //private readonly IMemoryCache memoryCache;
+        //private readonly ILocalStorageService _localStorage;
+        //private readonly AuthenticationStateProvider _authenticationStateProvider;
         public NewsService(
         JudoDbContext db,
             ILogger<NewsService> logger,
             UserManager<ApiUser> userManager,
             IMapper mapper,
             IConfiguration configuration,
-            IMemoryCache memoryCache,
-            IEmailSender emailSender,
             ITokenRepo tokenRepo,
-            ILocalStorageService localStorage,
-            AuthenticationStateProvider authenticationStateProvider
+            //IMemoryCache memoryCache,
+            //ILocalStorageService localStorage,
+            //AuthenticationStateProvider authenticationStateProvider,
+            IEmailSender emailSender
         )
         {
             _db = db;
@@ -33,9 +33,9 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
             this.configuration = configuration;
             this.emailSender = emailSender;
             this.tokenRepo = tokenRepo;
-            this.memoryCache = memoryCache;
-            _localStorage = localStorage;
-            _authenticationStateProvider = authenticationStateProvider;
+            //this.memoryCache = memoryCache;
+            //_localStorage = localStorage;
+            //_authenticationStateProvider = authenticationStateProvider;
         }
 
         public async Task CallUpdate()

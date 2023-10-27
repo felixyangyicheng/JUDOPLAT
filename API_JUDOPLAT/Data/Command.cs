@@ -1,4 +1,6 @@
 ﻿
+
+
 namespace JUDOPLAT.API_JUDOPLAT.Data
 {
     [Table("command")]

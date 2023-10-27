@@ -1,6 +1,8 @@
 ﻿
 
 
+
+
 namespace JUDOPLAT.API_JUDOPLAT.Services
 {
     public class PdfService : IPdfRepo

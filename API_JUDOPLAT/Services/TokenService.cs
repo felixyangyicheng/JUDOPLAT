@@ -1,6 +1,8 @@
 ﻿
 
 
+
+
 namespace JUDOPLAT.API_JUDOPLAT.Services
 {
     public class TokenService : ITokenRepo
@@ -11,14 +13,14 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
         private readonly UserManager<ApiUser> userManager;
         private readonly IConfiguration configuration;
         private readonly IEmailSender emailSender;
-        private readonly IMemoryCache memoryCache;
+        //private readonly IMemoryCache memoryCache;
 
         public TokenService(
             ILogger<TokenService> logger,
             UserManager<ApiUser> userManager,
             IMapper mapper,
             IConfiguration configuration,
-            IMemoryCache memoryCache,
+            //IMemoryCache memoryCache,
             IEmailSender emailSender)
         {
             this.logger = logger;
@@ -26,7 +28,7 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
             this.userManager = userManager;
             this.configuration = configuration;
             this.emailSender = emailSender;
-            this.memoryCache = memoryCache;
+            //this.memoryCache = memoryCache;
         }
         public async Task<string> GenerateToken(ApiUser user, bool thirdParty, string? imageLink)
         {

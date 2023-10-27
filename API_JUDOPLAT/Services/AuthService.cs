@@ -10,19 +10,20 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
     private readonly IConfiguration configuration;
     private readonly IEmailSender emailSender;
     private readonly ITokenRepo tokenRepo;
-        private readonly IMemoryCache memoryCache;
-    private readonly ILocalStorageService _localStorage;
-    private readonly AuthenticationStateProvider _authenticationStateProvider;
+    //    private readonly IMemoryCache memoryCache;
+    //private readonly ILocalStorageService _localStorage;
+    //private readonly AuthenticationStateProvider _authenticationStateProvider;
         public AuthService(
         ILogger<AuthService> logger,
         UserManager<ApiUser> userManager,
         IMapper mapper,
         IConfiguration configuration,
-        IMemoryCache memoryCache,
+        ///IMemoryCache memoryCache,
         IEmailSender emailSender,
-        ITokenRepo tokenRepo,
-                    ILocalStorageService localStorage,
-            AuthenticationStateProvider authenticationStateProvider
+        ITokenRepo tokenRepo
+            //,
+            //        ILocalStorageService localStorage,
+            //AuthenticationStateProvider authenticationStateProvider
             )
     {
         this.logger = logger;
@@ -31,9 +32,9 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
         this.configuration = configuration;
         this.emailSender = emailSender;
         this.tokenRepo = tokenRepo;
-            this.memoryCache = memoryCache;
-            _localStorage = localStorage;
-            _authenticationStateProvider = authenticationStateProvider;
+            //this.memoryCache = memoryCache;
+            //_localStorage = localStorage;
+            //_authenticationStateProvider = authenticationStateProvider;
         }
    
         public async Task<bool> CheckMail(string email)
@@ -100,10 +101,10 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
                     return false;
                 }
                 string tokenString = await tokenRepo.GenerateToken(user, false, "");
-                await _localStorage.SetItemAsync("authToken", tokenString);
-                //Change auth state of app
-                await ((ApiAuthenticationStateProvider)_authenticationStateProvider)
-                    .LoggedIn();
+                //await _localStorage.SetItemAsync("authToken", tokenString);
+                ////Change auth state of app
+                //await ((ApiAuthenticationStateProvider)_authenticationStateProvider)
+                //    .LoggedIn();
                 //_client.DefaultRequestHeaders.Authorization =
                 //    new AuthenticationHeaderValue("bearer", tokenString);
                 return true;
@@ -119,9 +120,9 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
 
         public async Task Logout()
         {
-            await _localStorage.RemoveItemAsync("authToken");
-            ((ApiAuthenticationStateProvider)_authenticationStateProvider)
-                .LoggedOut();
+            //await _localStorage.RemoveItemAsync("authToken");
+            //((ApiAuthenticationStateProvider)_authenticationStateProvider)
+            //    .LoggedOut();
         }
 
         public async Task<bool> Register(UserRegisterDto userDto)
@@ -266,10 +267,10 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
             var login = await userManager.FindByEmailAsync(usercredential.Email);
 
             string tokenString = await tokenRepo.GenerateToken(login, true, usercredential.Photo);
-            await _localStorage.SetItemAsync("authToken", tokenString);
-            //Change auth state of app
-            await ((ApiAuthenticationStateProvider)_authenticationStateProvider)
-                .LoggedIn();
+            //await _localStorage.SetItemAsync("authToken", tokenString);
+            ////Change auth state of app
+            //await ((ApiAuthenticationStateProvider)_authenticationStateProvider)
+            //    .LoggedIn();
             //_client.DefaultRequestHeaders.Authorization =
             //    new AuthenticationHeaderValue("bearer", tokenString);
             return true;
