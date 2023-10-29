@@ -1,0 +1,119 @@
+﻿
+@implements IAsyncDisposable
+
+@if (Posts == null)
+{
+    <Bounce></Bounce>
+}
+else
+{
+
+    <div class="ma-0" style="height:60vh;overflow: auto;">
+        <MudGrid Style="  width:100%" id="eleScroll">
+
+            <Virtualize ItemsProvider="@LoadPosts" Context="post" OverscanCount="16">
+                <ItemContent>
+                    <MudCard Class="flex-row" Elevation="1" Style="width:100%; padding:5px ; overflow:auto" Outlined="true">
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6">
+                                    @post.Title
+                                </MudText>
+                                <MudText Typo="Typo.caption">
+                                    @post.CreatedOn
+
+                                </MudText>
+                                <MudText Typo="Typo.caption">
+                                    (Updated at @post.CreatedOn )
+                                </MudText>
+                            </CardHeaderContent>
+                            <CardHeaderAvatar>
+                                <MudAvatar Color="Color.Tertiary" Square="true">@(post.ApiUser.UserName.Substring(0, 1))</MudAvatar>
+                            </CardHeaderAvatar>
+
+                        </MudCardHeader>
+
+                        <MudCardContent Class="d-flex">
+
+                            @((MarkupString)post.Content)
+
+                        </MudCardContent>
+                        <MudOverlay Visible="isVisible" DarkBackground="true" Absolute="true">
+                            <MudAvatarGroup Max="8" Spacing="3" MaxColor="Color.Warning">
+
+                                @foreach (var c in post.Comments)
+                                {
+
+                                    <MudExpansionPanel Text="@c.ApiUser.UserName">
+                                        <TitleContent>
+                                            <div class="d-flex">
+
+                                                <MudBadge Content="@(post.Comments.Count())" Color="Color.Primary" Overlap="true" Class="d-flex ml-auto">
+                                                    <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Default" />
+                                                </MudBadge>
+                                            </div>
+                                        </TitleContent>
+                                        <ChildContent>
+                                            @c.Content
+                                        </ChildContent>
+                                    </MudExpansionPanel>
+                                }
+                            </MudAvatarGroup>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(e => ToggleOverlay(false))">Hide</MudButton>
+                        </MudOverlay>
+                        <MudExpansionPanels MultiExpansion="true" DisableBorders="true" Elevation="0" Dense="true">
+                        
+                                <MudExpansionPanel >
+                                    <TitleContent>
+                                        <div class="d-flex">
+
+                                            <MudBadge Content="@(post.Comments.Count())" Color="Color.Primary" Overlap="true" Class="d-flex ml-auto">
+                                                <MudIcon Icon="@Icons.Material.Filled.Comment" Color="Color.Default" />
+                                            </MudBadge>
+                                        </div>
+                                    </TitleContent>
+                              
+                                    <ChildContent>
+
+                                        @if (post.Comments != null)
+                                        {
+                                            <MudExpansionPanels MultiExpansion="true" DisableBorders="true" Elevation="0" Dense="true">
+
+                                                @foreach (var c in post.Comments)
+                                                {
+
+                                                    <MudExpansionPanel Text="@c.ApiUser.UserName">
+                                   
+                                                        <ChildContent>
+                                                            @c.Content
+                                                        </ChildContent>
+                                                    </MudExpansionPanel>
+                                                }
+                                            </MudExpansionPanels>
+
+                                        }
+                    
+                                    </ChildContent>
+                                </MudExpansionPanel>
+
+
+                        </MudExpansionPanels>
+                        <MudCardActions>
+                            <MudIconButton Size="Size.Small" Icon="@Icons.Sharp.Add" Variant="Variant.Filled" Color="Color.Success" @onclick="()=>OpenDialogCreateComment(post)">+</MudIconButton>
+
+                        </MudCardActions>
+                    </MudCard>
+                </ItemContent>
+                <Placeholder>
+                    <MudCard Style="width=100%">
+
+                        <Bounce Color="#059b93"></Bounce>
+                    </MudCard>
+                </Placeholder>
+            </Virtualize>
+        </MudGrid>
+    </div>
+
+
+
+}
