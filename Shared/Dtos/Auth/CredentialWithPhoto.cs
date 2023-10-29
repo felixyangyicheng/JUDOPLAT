@@ -1,5 +1,5 @@
 ﻿
-namespace JUDOPLAT.API_JUDOPLAT.Statics
+namespace JUDOPLAT.Shared.Dtos.Auth
 {
     public class CredentialWithPhoto 
     {

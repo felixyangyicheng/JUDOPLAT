@@ -1,6 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-namespace JUDOPLAT.API_JUDOPLAT.Data
+﻿
+namespace JUDOPLAT.Shared.Dtos.Svgs
 {
     public class PdfModel
     {

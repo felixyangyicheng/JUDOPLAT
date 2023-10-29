@@ -5,4 +5,6 @@ global using JUDOPLAT.Shared.Dtos.Newss;
 global using JUDOPLAT.Shared.Dtos.Notifications;
 global using JUDOPLAT.Shared.Dtos.IndexMarkdowns;
 global using System.ComponentModel.DataAnnotations.Schema;
-global using Microsoft.AspNetCore.Components;
+global  using Microsoft.AspNetCore.Components;
+global using MongoDB.Bson.Serialization.Attributes;
+global using MongoDB.Bson;
