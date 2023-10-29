@@ -4,7 +4,7 @@ using MudBlazor;
 using Tewr.Blazor.FileReader;
 
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components.Upload
+namespace WASM_JUDOPLAT.Components.Upload
 {
     public partial class UploadPdf
     {

@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 //using static Org.BouncyCastle.Math.EC.ECCurve;
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components
+namespace WASM_JUDOPLAT.Components
 {
     public partial class GoogleAuthComponent
     {
@@ -45,8 +45,7 @@ namespace JUDOPLAT.WASM_JUDOPLAT.Components
             StateHasChanged();
         }
         //Automatically binded by @bind
-        //https://www.syncfusion.com/faq/blazor/components/how-do-you-pass-values-from-child-to-parent-using-eventcallback-in-blazor
-        [Parameter]
+            [Parameter]
         public EventCallback<CredentialWithPhoto> UserCredentialChanged { get; set; }
         public void Dispose()
         {

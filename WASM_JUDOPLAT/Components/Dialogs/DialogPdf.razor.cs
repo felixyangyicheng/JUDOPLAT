@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components.Dialogs
+namespace WASM_JUDOPLAT.Components.Dialogs
 {
     public partial class DialogPdf
     {

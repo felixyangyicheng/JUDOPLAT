@@ -2,7 +2,7 @@
 using MudBlazor;
 
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components
+namespace WASM_JUDOPLAT.Components
 {
     public partial class ForgetPassword
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 using Microsoft.JSInterop;
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components.Posts
+namespace WASM_JUDOPLAT.Components.Posts
 {
 	public partial class PostListComponent
 	{

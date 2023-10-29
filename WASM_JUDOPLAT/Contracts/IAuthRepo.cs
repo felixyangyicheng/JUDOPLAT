@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Contracts
+namespace WASM_JUDOPLAT.Contracts
 {
     public interface IAuthRepo
     {

@@ -9,5 +9,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.13" />
     <PackageReference Include="MongoDB.Bson" Version="2.22.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.12" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using MailKit.Search;
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components.Posts
+namespace WASM_JUDOPLAT.Components.Posts
 {
 	public partial class PostCreateComponent
 	{

@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components.Libraries
+namespace WASM_JUDOPLAT.Components.Libraries
 {
     public partial class PdfLibrary
     {

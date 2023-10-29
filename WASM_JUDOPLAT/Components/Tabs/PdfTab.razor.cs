@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace judo_univ_rennes.Components.Tabs
+namespace WASM_JUDOPLAT.Components.Tabs
 {
     public partial class PdfTab
     {
