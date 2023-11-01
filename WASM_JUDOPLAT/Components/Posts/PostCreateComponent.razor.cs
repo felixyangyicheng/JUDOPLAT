@@ -1,5 +1,4 @@
 ﻿using System;
-using MailKit.Search;
 
 namespace WASM_JUDOPLAT.Components.Posts
 {
@@ -16,7 +15,7 @@ namespace WASM_JUDOPLAT.Components.Posts
         [Inject] AuthenticationStateProvider _authProvider { get; set; }
         #endregion
         #region Properties
-        protected RichTextEdit richTextEditRef;
+        //protected RichTextEdit richTextEditRef;
         protected ClaimsPrincipal user { get; set; }
         protected string uid { get; set; }
         protected bool readOnly;
@@ -43,7 +42,7 @@ namespace WASM_JUDOPLAT.Components.Posts
             user = state.User;
             uid = user.Claims.FirstOrDefault(s => s.Type == "uid").Value;
 
-            await richTextEditRef.SetHtmlAsync(contentAsHtml);
+            //await richTextEditRef.SetHtmlAsync(contentAsHtml);
 
             DisplayContent = (MarkupString)contentAsHtml;
 
@@ -52,37 +51,37 @@ namespace WASM_JUDOPLAT.Components.Posts
         }
         public async Task OnContentChanged()
         {
-            contentAsHtml = await richTextEditRef.GetHtmlAsync();
-            DisplayContent = (MarkupString)contentAsHtml;
-            contentAsDeltaJson = await richTextEditRef.GetDeltaAsync();
-            contentAsText = await richTextEditRef.GetTextAsync();
-            savedContent = contentAsHtml;
+            //contentAsHtml = await richTextEditRef.GetHtmlAsync();
+            //DisplayContent = (MarkupString)contentAsHtml;
+            //contentAsDeltaJson = await richTextEditRef.GetDeltaAsync();
+            //contentAsText = await richTextEditRef.GetTextAsync();
+            //savedContent = contentAsHtml;
             StateHasChanged();
         }
 
         public async Task OnSave()
         {
-            savedContent = await richTextEditRef.GetHtmlAsync();
-            PostToAdd.ApiUserId = uid;
-            PostToAdd.Content = savedContent;
-            PostToAdd.CreatedOn = DateTime.UtcNow;
-            PostToAdd.UpdatedOn = DateTime.UtcNow;
+            //savedContent = await richTextEditRef.GetHtmlAsync();
+            //PostToAdd.ApiUserId = uid;
+            //PostToAdd.Content = savedContent;
+            //PostToAdd.CreatedOn = DateTime.UtcNow;
+            //PostToAdd.UpdatedOn = DateTime.UtcNow;
  
 
-            var ok = await _postRepo.Create(PostToAdd);
+            //var ok = await _postRepo.Create(PostToAdd);
 
 
-            if (ok)
-            {
+            //if (ok)
+            //{
 
-                await richTextEditRef.ClearAsync();
-                PostToAdd = new();
-                await OnPostAdded.InvokeAsync(ok);
-            }
-            else
-            {
-                snackbar.Add("KO", Severity.Error);
-            }
+            //    //await richTextEditRef.ClearAsync();
+            //    PostToAdd = new();
+            //    await OnPostAdded.InvokeAsync(ok);
+            //}
+            //else
+            //{
+            //    snackbar.Add("KO", Severity.Error);
+            //}
         }
         #endregion
     }

@@ -1,13 +1,4 @@
-﻿using System;
-using Blazored.LocalStorage;
-
-using Google;
-
-
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-
-using Microsoft.JSInterop;
+﻿
 
 namespace WASM_JUDOPLAT.Components.Posts
 {
@@ -20,9 +11,9 @@ namespace WASM_JUDOPLAT.Components.Posts
         [Inject] IConfiguration _config { get; set; }
         [Inject] IPostRepo _postRepo { get; set; }
         [Inject] ILocalStorageService _localStorage { get; set; }
-        [Inject] IMapper _mapper { get; set; }
+    
         [Inject] AuthenticationStateProvider _authProvider { get; set; }
-        [Inject] JudoDbContext _db { get; set; }
+
         [Inject] IJSRuntime JsRuntime { get; set; }
         [Inject] IDialogService DialogService { get; set; }
         [Inject] NavigationManager _nav { get; set; }
@@ -51,8 +42,9 @@ namespace WASM_JUDOPLAT.Components.Posts
 
         private async ValueTask<ItemsProviderResult<Post>> LoadPosts(ItemsProviderRequest request)
         {
-            var posts = await  _postRepo.GetAll();
-            return new ItemsProviderResult<Post>(posts.Skip(request.StartIndex).Take(request.Count), posts.Count());
+            //var posts = await _postRepo.GetAll();
+            //return new ItemsProviderResult<Post>(posts.Skip(request.StartIndex).Take(request.Count), posts.Count());
+            throw new NotImplementedException();
         }
 
         protected override async Task OnInitializedAsync()
@@ -63,7 +55,7 @@ namespace WASM_JUDOPLAT.Components.Posts
             var user = state.User;
 
             var posts = await _postRepo.GetAll();
-            Posts = _mapper.Map<List<PostDto>>(posts);
+            //Posts = _mapper.Map<List<PostDto>>(posts);
             jsModule = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./Components/Posts/PostListComponent.razor.js");
          
             base.OnInitializedAsync();
@@ -74,57 +66,57 @@ namespace WASM_JUDOPLAT.Components.Posts
 
         private async Task StartHubConnection()
         {
-            hubConnection = new HubConnectionBuilder()
-                .WithUrl(_nav.ToAbsoluteUri("/notifhub"), options =>
-                    {
-                        options.AccessTokenProvider = async () =>
-                        {
-                            var token= await _localStorage.GetItemAsync<string>("authToken");
-                            Console.WriteLine(token);
-                            return token;
-                        };
-                    }
-                )
-                .Build();
+            //hubConnection = new HubConnectionBuilder()
+            //    .WithUrl(_nav.ToAbsoluteUri("/notifhub"), options =>
+            //        {
+            //            options.AccessTokenProvider = async () =>
+            //            {
+            //                var token= await _localStorage.GetItemAsync<string>("authToken");
+            //                Console.WriteLine(token);
+            //                return token;
+            //            };
+            //        }
+            //    )
+            //    .Build();
 
-            hubConnection.On<FullPostNotification>("refreshPost", async (notif) =>
-            {
+            //hubConnection.On<FullPostNotification>("refreshPost", async (notif) =>
+            //{
 
-                await JsRuntime.InvokeVoidAsync("console.log", notif.table);
-                if (notif.action == "INSERT")
-                {
+            //    await JsRuntime.InvokeVoidAsync("console.log", notif.table);
+            //    if (notif.action == "INSERT")
+            //    {
 
-                    RecentPost = notif.data;
-                    Posts.Add(RecentPost);
-                    Posts.OrderByDescending(p => p.Id);
-                    InvokeAsync(StateHasChanged);
+            //        RecentPost = notif.data;
+            //        Posts.Add(RecentPost);
+            //        Posts.OrderByDescending(p => p.Id);
+            //        InvokeAsync(StateHasChanged);
 
 
-                }
-                else if (notif.action =="DELETE")
-                {
-                    RemovePost = notif.data;
-                    Posts.Remove(Posts.FirstOrDefault(p => p.Id == RemovePost.Id));
-                    Posts.OrderByDescending(p => p.Id);
-                    InvokeAsync(StateHasChanged);
+            //    }
+            //    else if (notif.action =="DELETE")
+            //    {
+            //        RemovePost = notif.data;
+            //        Posts.Remove(Posts.FirstOrDefault(p => p.Id == RemovePost.Id));
+            //        Posts.OrderByDescending(p => p.Id);
+            //        InvokeAsync(StateHasChanged);
 
-                }
-                else if (notif.action == "UPDATE")
-                {
+            //    }
+            //    else if (notif.action == "UPDATE")
+            //    {
 
-                    ModifiedPost = notif.data;
-                    Posts.Remove(Posts.FirstOrDefault(p => p.Id == ModifiedPost.Id));
-                    Posts.Add(ModifiedPost);
-                    Posts.OrderByDescending(p => p.Id);
+            //        ModifiedPost = notif.data;
+            //        Posts.Remove(Posts.FirstOrDefault(p => p.Id == ModifiedPost.Id));
+            //        Posts.Add(ModifiedPost);
+            //        Posts.OrderByDescending(p => p.Id);
              
-                    InvokeAsync(StateHasChanged);
-                    ShouldRender();
+            //        InvokeAsync(StateHasChanged);
+            //        ShouldRender();
 
-                }
-                InvokeAsync(StateHasChanged);
-            });
-            await hubConnection.StartAsync();
-            Console.WriteLine(hubConnection.State);
+            //    }
+            //    InvokeAsync(StateHasChanged);
+            //});
+            //await hubConnection.StartAsync();
+            //Console.WriteLine(hubConnection.State);
         }
         #endregion
 
@@ -145,14 +137,14 @@ namespace WASM_JUDOPLAT.Components.Posts
             var options = new DialogOptions { CloseOnEscapeKey = true, };
             DialogService.Show<PostCommentCreationDialog>("Créer un commentaire", parameters, options);
         }
-        public bool IsConnected =>
-        hubConnection?.State == HubConnectionState.Connected;
+        //public bool IsConnected =>
+        //hubConnection?.State == HubConnectionState.Connected;
 
         public async ValueTask DisposeAsync()
         {
             if (hubConnection is not null)
             {
-                await hubConnection.DisposeAsync();
+                //await hubConnection.DisposeAsync();
             }
         }
 

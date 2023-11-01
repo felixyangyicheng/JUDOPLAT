@@ -1,4 +1,6 @@
-﻿<MudDialog>
+﻿@using JUDOPLAT.Shared.Data;
+@using System.Security.Claims;
+<MudDialog>
     <DialogContent>
         @((MarkupString)post.Content)
         <MudTextField @bind-Value="commentContent"
@@ -58,11 +60,11 @@
                 comment.UpdatedOn = DateTime.UtcNow;
                 comment.CreatedOn = DateTime.UtcNow;
                 comment.Content = commentContent;
-                var result = await _commentRepo.Create(comment);
-                if (result)
-                {
-                    snackbar.Add($"Commentaire créé", Severity.Success);
-                }
+                //var result = await _commentRepo.Create((CommentDto)comment);
+                //if (result)
+                //{
+                //    snackbar.Add($"Commentaire créé", Severity.Success);
+                //}
                 Submit();
 
             }

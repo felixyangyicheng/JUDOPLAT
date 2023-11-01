@@ -44,5 +44,29 @@ namespace JUDOPLAT.API_JUDOPLAT.Controllers
                 return Problem($"Something Went Wrong in the {nameof(GetOne)}", statusCode: 500);
             }
         }
+
+        [HttpGet]
+
+        [Route("all")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
+        public async  IAsyncEnumerable<PdfModel> GetAsync()
+        {
+            logger.LogInformation($"Pdf Attempt GetAsync all");
+
+       
+            var db =await _pdfRepo.GetAsync();
+            foreach (var p in db)
+            {
+                
+                yield return p;
+                    
+            }
+       
+        }
     }
 }

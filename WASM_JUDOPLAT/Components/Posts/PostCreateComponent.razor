@@ -8,7 +8,7 @@
                   HelperText="Titre"></MudTextField>
     <MudSpacer></MudSpacer>
 
-    <RichTextEdit @ref="richTextEditRef"
+  @*  <RichTextEdit @ref="richTextEditRef"
                   Theme="RichTextEditTheme.Snow"
                   ContentChanged="@OnContentChanged"
                   PlaceHolder="Saisissez vos contenus ici..."
@@ -103,6 +103,6 @@
                 <MudButton OnClick="@OnSave" Disabled="@(string.IsNullOrEmpty(PostToAdd.Title)||string.IsNullOrEmpty(savedContent))"><Blazorise.Icon Name="IconName.Check" /></MudButton>
             </RichTextEditToolbarGroup>
         </Toolbar>
-    </RichTextEdit>
+    </RichTextEdit>*@
 
     </MudCard>

@@ -3,6 +3,8 @@
 
 
 
+
+
 namespace JUDOPLAT.API_JUDOPLAT.Services
 {
     public class PdfService : IPdfRepo
@@ -35,6 +37,8 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
 
         public async Task<PdfModel?> GetByNameAsync(string name) =>
             await _collection.Find(x => x.FileName == name).FirstOrDefaultAsync();
+
+
 
         public PdfModel GetChanges()
         {

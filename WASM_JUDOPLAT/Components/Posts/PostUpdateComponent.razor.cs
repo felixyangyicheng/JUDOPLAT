@@ -15,7 +15,7 @@ namespace WASM_JUDOPLAT.Components.Posts
         [Inject] AuthenticationStateProvider _authProvider { get; set; }
         #endregion
         #region Properties
-        protected RichTextEdit richTextEditRef;
+        //protected RichTextEdit richTextEditRef;
         protected bool readOnly;
         protected string contentAsHtml = " <p>come On baby</p>";
         protected MarkupString DisplayContent;
@@ -40,9 +40,9 @@ namespace WASM_JUDOPLAT.Components.Posts
             var user = state.User;
             PostToUpdate.ApiUserId = user.Claims.FirstOrDefault(s => s.Type == "uid").Value;
 
-            PostToUpdate = await _postRepo.FindById(PostId);
+            //PostToUpdate = await _postRepo.FindById(PostId);
 
-            await richTextEditRef.SetHtmlAsync(PostToUpdate.Content);
+            //await richTextEditRef.SetHtmlAsync(PostToUpdate.Content);
 
             DisplayContent = (MarkupString)contentAsHtml;
 
@@ -51,31 +51,31 @@ namespace WASM_JUDOPLAT.Components.Posts
         }
         public async Task OnContentChanged()
         {
-            contentAsHtml = await richTextEditRef.GetHtmlAsync();
-            DisplayContent = (MarkupString)contentAsHtml;
-            contentAsDeltaJson = await richTextEditRef.GetDeltaAsync();
-            contentAsText = await richTextEditRef.GetTextAsync();
+            //contentAsHtml = await richTextEditRef.GetHtmlAsync();
+            //DisplayContent = (MarkupString)contentAsHtml;
+            //contentAsDeltaJson = await richTextEditRef.GetDeltaAsync();
+            //contentAsText = await richTextEditRef.GetTextAsync();
 
             StateHasChanged();
         }
 
         public async Task OnSave()
         {
-            savedContent = await richTextEditRef.GetHtmlAsync();
+            //savedContent = await richTextEditRef.GetHtmlAsync();
 
             PostToUpdate.Content = savedContent;
     
             PostToUpdate.UpdatedOn = DateTime.UtcNow;
         
 
-            var ok = await _postRepo.Update(PostToUpdate);
+            //var ok = await _postRepo.Update(PostToUpdate);
 
 
-            if (ok)
-            {
+            //if (ok)
+            //{
 
-                await richTextEditRef.ClearAsync();
-            }
+            //    await richTextEditRef.ClearAsync();
+            //}
         }
         #endregion
     }

@@ -13,6 +13,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        builder.WebHost.UseUrls(new[] { "http://*:8081" });
 
         // Add services to the container.
         builder.Services.Configure<ConnectionStringModel>(
@@ -35,14 +36,14 @@ builder.Configuration.GetSection("MongoDatabase"));
             opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                   new[] { "application/octet-stream" });
         });
-
+        builder.Services.AddSignalR();
         var connString = builder.Configuration.GetConnectionString("Account");
-        builder.Services.AddDbContextPool<JudoDbContext>(options =>
+        builder.Services.AddDbContext<JudoDbContext>(options =>
         {
             options.UseNpgsql(connString);
-        }
-        //ServiceLifetime.Transient
-        );
+        },
+              ServiceLifetime.Transient
+          );
 
         builder.Services.Configure<CookiePolicyOptions>(options =>
         {
@@ -86,6 +87,18 @@ builder.Configuration.GetSection("MongoDatabase"));
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
             };
         });
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigins",
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("*")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                                  });
+        });
+        builder.Services.AddAutoMapper(typeof(MapperConfig));
         builder.Services.AddControllers();
         builder.Services.AddScoped<JwtSecurityTokenHandler>();
             var emailConfig = builder.Configuration
@@ -118,7 +131,7 @@ builder.Configuration.GetSection("MongoDatabase"));
         }
 
             app.UseRouting();
-            app.UseCors("CorsPolicy");
+            app.UseCors("AllowSpecificOrigins");
             app.UseAuthentication();
             app.UseAuthorization();
 

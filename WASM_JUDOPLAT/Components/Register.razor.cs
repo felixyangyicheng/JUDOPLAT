@@ -3,7 +3,7 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 
-namespace JUDOPLAT.WASM_JUDOPLAT.Components
+namespace WASM_JUDOPLAT.Components
 {
     public partial class Register
     {

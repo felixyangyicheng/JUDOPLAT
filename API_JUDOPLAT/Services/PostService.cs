@@ -62,7 +62,12 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<Post>> GetAll()
+        public Task<List<Post>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async IAsyncEnumerable<PostViewModel> GetAllAsync()
         {
 
 
@@ -74,12 +79,21 @@ namespace JUDOPLAT.API_JUDOPLAT.Services
             //            .ThenInclude(c => c.ApiUser)
             //            .ToListAsync();
             //return posts;
-            return await _db.Posts
+            var ps=  _db.Posts
                 .AsNoTracking()
                 .Include(u => u.ApiUser)
                 .Include(u => u.Comments)
                 .ThenInclude(c => c.ApiUser)
-                .ToListAsync();
+                .AsAsyncEnumerable();
+
+         
+
+            await foreach (var post in ps)
+            {
+            
+                    yield return mapper.Map< PostViewModel > (post);
+             
+            }
         }
 
         //public async Task<PagedList<PostDto>> GetAllPaged(BaseItemParameters param)
