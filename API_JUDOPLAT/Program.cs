@@ -13,7 +13,15 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.WebHost.UseUrls(new[] { "http://*:8081" });
+        // builder.WebHost.UseUrls(new[] { "http://*:8081" });
+        builder.WebHost.ConfigureKestrel((context, options) =>
+    {
+        options.ListenAnyIP(8081, listenOptions =>
+        {
+            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+            listenOptions.UseHttps();
+        });
+    });
 
         // Add services to the container.
         builder.Services.Configure<ConnectionStringModel>(

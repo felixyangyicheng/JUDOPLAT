@@ -1,0 +1,38 @@
+﻿
+<br />
+
+@* <SearchBarItem OnSearchChanged="InputChanged"></SearchBarItem> *@
+
+<br />
+
+    @if (loading==true)
+    {
+        <CircleFade Color="rgba(33,150,243,0.3)"/>
+    }
+<p> @FileCount result(s), in @elapsedMs ms</p>
+<MudExpansionPanels Dense="true">
+        @foreach (var f in PdfModels)
+        {
+            <MudExpansionPanel Text="@f.FileName">
+                <MudGrid>
+ 
+                    <MudItem xs="12" sm="12" lg="3">
+                       <MudCard Style="overflow:auto">
+                           <MudCardHeader>
+                               @f.FileName
+                           </MudCardHeader>
+    @*                        <MudCardContent Style="max-height:450px; overflow-y:scroll">
+                               @((MarkupString)f.TextToPreview)
+                           </MudCardContent> *@
+                       </MudCard>
+                    </MudItem>
+                    <MudItem xs="12" sm="12" lg="9">
+             
+
+                            <embed height="750vh" width="1200vw" type="application/pdf" src="@($"{Endpoints.Pdf}{f.FileName}")" />
+                        
+                    </MudItem>
+                </MudGrid>
+            </MudExpansionPanel>
+        }
+</MudExpansionPanels>

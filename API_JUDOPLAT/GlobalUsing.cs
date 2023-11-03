@@ -31,6 +31,7 @@ global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.AspNetCore.SignalR;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.AspNetCore.Server.Kestrel.Core;
 global using Newtonsoft.Json;
 
 global using System.ComponentModel.DataAnnotations.Schema;

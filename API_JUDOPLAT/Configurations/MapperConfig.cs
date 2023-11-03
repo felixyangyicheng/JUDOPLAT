@@ -38,6 +38,8 @@ namespace JUDOPLAT.API_JUDOPLAT.Configurations
                 .ReverseMap();
             CreateMap<News, NewsDto>()
                 .ReverseMap();
+            CreateMap<PdfModel, PdfModelSimple>()
+                .ReverseMap();
         }
     }
 }

@@ -12,10 +12,10 @@ global using JUDOPLAT.Shared.Data;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.Extensions.Options;
 global using Microsoft.JSInterop;
-global using WASM_JUDOPLAT.Components.Dialogs;
+global using WASM_JUDOPLAT.Provider;
+global using WASM_JUDOPLAT.Services;
 global using WASM_JUDOPLAT.Components.Libraries;
-global using WASM_JUDOPLAT.Components.Dialogs;
-global using WASM_JUDOPLAT.Components.Dialogs;
+
 global using Blazored.LocalStorage;
 global using WASM_JUDOPLAT.Contracts;
 global using Microsoft.AspNetCore.Components.Authorization;

@@ -189,14 +189,14 @@ namespace WASM_JUDOPLAT.Components.Upload
 
         private async Task ShowFile(string fileName)
         {
-            var parameters = new DialogParameters();
-            parameters.Add("fileName", fileName);
-            parameters.Add("projectName", SelectedProject);
+            //var parameters = new DialogParameters();
+            //parameters.Add("fileName", fileName);
+            //parameters.Add("projectName", SelectedProject);
 
-            parameters.Add("ButtonText", "Show");
-            parameters.Add("Color", Color.Info);
-            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraExtraLarge, };
-            var result = await DialogService.Show<DialogPdf>("Documents PDF", parameters, options).Result;
+            //parameters.Add("ButtonText", "Show");
+            //parameters.Add("Color", Color.Info);
+            //var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraExtraLarge, };
+            //var result = await DialogService.Show<DialogPdf>("Documents PDF", parameters, options).Result;
 
         }
 

@@ -4,11 +4,15 @@ namespace WASM_JUDOPLAT.Contracts
 {
     public interface IPdfRepo//:IMongoReposBase<PdfModel>
     {
-        public Task<PdfModel?> GetByNameAsync(string name);
-        public Task RemoveAsync(string name);
-        public Task<bool> UpdateAsync(string id, PdfModel pdfModel);
-        public Task<bool> CreateAsync( PdfModel pdfModel);
-        public Task<IList<PdfModel>> GetAsync( );
+         Task<PdfModel?> GetByNameAsync(string name);
+         Task RemoveAsync(string name);
+         Task<bool> UpdateAsync(string id, PdfModel pdfModel);
+         Task<bool> CreateAsync( PdfModel pdfModel);
+         Task<IList<PdfModel>> GetAsync( );
+
+         IAsyncEnumerable<PdfModel> GetDataAsync();
+         IAsyncEnumerable<PdfModelSimple> GetSimpleDataAsync();
+
         //public Task<PdfModel?> GetByProjectNameAndFileNameAsync(string projectname, string filename);
         //public Task<IList<PdfModel?>> GetByProjectNameAndCategoryAsync(string projectname, string category);
         //public Task<IList<PdfModel?>> GetByProjectNameAsync(string projectname);
