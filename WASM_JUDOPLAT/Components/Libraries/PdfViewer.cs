@@ -40,7 +40,7 @@
         /// <summary>
         /// items in MudBlazor table
         /// </summary>
-        protected List<PdfModelSimple> PdfModels { get; set; }
+        protected List<PdfModelSimple> PdfModels { get; set; }=new List<PdfModelSimple>();
 
         #endregion
         #region methods
@@ -60,7 +60,7 @@
         protected override async Task OnParametersSetAsync()
         {
             loading = true;
-            StateHasChanged();
+             InvokeAsync(StateHasChanged);
             PdfModels = new List<PdfModelSimple>();
             var tasks = new List<Task>();
             var b = Task.Run(async () =>
@@ -74,7 +74,8 @@
             });
             Task.WhenAll(tasks);
             loading = false;
-            StateHasChanged();
+             InvokeAsync(StateHasChanged);
+
 
             base.OnParametersSetAsync();
         }

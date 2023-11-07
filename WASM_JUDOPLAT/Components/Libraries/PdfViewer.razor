@@ -5,10 +5,14 @@
 
 <br />
 
-    @if (loading==true)
+    @if (PdfModels.Count < 0)
     {
         <CircleFade Color="rgba(33,150,243,0.3)"/>
     }
+       @if (loading==true )
+    {
+        <CircleFade Color="rgba(33,150,243,0.3)"/>
+    } 
 <p> @FileCount result(s), in @elapsedMs ms</p>
 <MudExpansionPanels Dense="true">
         @foreach (var f in PdfModels)
@@ -29,7 +33,7 @@
                     <MudItem xs="12" sm="12" lg="9">
              
 
-                            <embed height="750vh" width="1200vw" type="application/pdf" src="@($"{Endpoints.Pdf}{f.FileName}")" />
+                            <embed height="750vh" width="700vw" type="application/pdf" src="@($"{Endpoints.Pdf}{f.FileName}")" />
                         
                     </MudItem>
                 </MudGrid>

@@ -23,7 +23,8 @@ global using Npgsql;
 global using MailKit.Net.Smtp;
 global using MimeKit;
 global using MongoDB.Driver;
-
+global using Steeltoe.Discovery.Client;
+global using Steeltoe.Discovery.Eureka;
 global using Microsoft.Extensions.Options;
 global using Microsoft.AspNetCore.Components;
 global using Microsoft.AspNetCore.Identity;
