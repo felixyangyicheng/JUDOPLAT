@@ -23,11 +23,10 @@
                     <MudItem xs="12" sm="12" lg="3">
                        <MudCard Style="overflow:auto">
                            <MudCardHeader>
-                               @f.FileName
+                              <MudIconButton Icon="@Icons.Rounded.Download" OnClick="e=>DownloadPdf(f.FileName)">
+                              </MudIconButton>
                            </MudCardHeader>
-    @*                        <MudCardContent Style="max-height:450px; overflow-y:scroll">
-                               @((MarkupString)f.TextToPreview)
-                           </MudCardContent> *@
+
                        </MudCard>
                     </MudItem>
                     <MudItem xs="12" sm="12" lg="9">

@@ -103,7 +103,7 @@
             // AddEditionEvent($"RowEditCancel event: Editing of Element {((PdfUploadModel)element).FileName} canceled");
         }
 
-        private async Task Download(string fileName)
+        private async Task DownloadPdf(string fileName)
         {
             nav.ToAbsoluteUri($"{Endpoints.Pdf}{fileName}");
         }

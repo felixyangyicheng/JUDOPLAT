@@ -8,7 +8,7 @@ using JUDOPLAT.WASM_JUDOPLAT.Provider;
 using System.IdentityModel.Tokens.Jwt;
 using Tewr.Blazor.FileReader;
 using Microsoft.AspNetCore.Http;
-
+using Toolbelt.Blazor.Extensions.DependencyInjection;
 namespace WASM_JUDOPLAT;
 
 public class Program
@@ -23,6 +23,7 @@ public class Program
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
         builder.Services.AddBlazoredLocalStorage();
         //builder.Services.AddScoped<MemoryStorageUtility>(); //Memory storage
+        builder.Services.AddSpeechSynthesis();
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         builder.Services.AddMudServices(config =>

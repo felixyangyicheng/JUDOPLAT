@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <!--<PublishAot>true</PublishAot>-->
+     <!-- <RunAOTCompilation>true</RunAOTCompilation> -->
 	  <StripSymbols>true</StripSymbols>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
@@ -28,6 +29,8 @@
     <PackageReference Include="MudBlazor" Version="6.11.0" />
     <PackageReference Include="BlazorPro.Spinkit" Version="1.2.0" />
     <PackageReference Include="Tewr.Blazor.FileReader" Version="3.3.2.23201" />
+    <PackageReference Include="ToolBelt.Blazor.SpeechSynthesis" Version="10.3.0" />
+    <PackageReference Include="ToolBelt.Web.CssClassInlineBuilder" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

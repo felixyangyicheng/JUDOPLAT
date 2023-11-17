@@ -23,6 +23,7 @@ public class Program
         });
     });
 
+        builder.Serivices.AddServiceDiscovery(o => o.UseEureka());
         // Add services to the container.
         builder.Services.Configure<ConnectionStringModel>(
 builder.Configuration.GetSection("MongoDatabase"));
