@@ -40,7 +40,7 @@ namespace WASM_JUDOPLAT.Pages
             if (firstRender)
             {
                 if (this.Text == null) this.Text = "Hello, World!";
-                this.UpdateUrl();
+                //this.UpdateUrl();
 
                 this.Voices = await this.SpeechSynthesis.GetVoicesAsync();
                 this.StateHasChanged();
